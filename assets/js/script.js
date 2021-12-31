@@ -63,7 +63,8 @@ var createTaskEl = function(taskDataObj) {
     taskDataObj.id = taskIdCounter;
 
     tasks.push(taskDataObj);
-    console.log(tasks)
+    console.log(tasks);
+    saveTasks();
 
     var taskActionsEl = createTaskActions(taskIdCounter);
     listItemEl.appendChild(taskActionsEl);
@@ -91,6 +92,8 @@ var completeEditTask = function(taskName, taskType, taskId) {
         tasks[i].type = taskType;
         }
     };
+
+    saveTasks();
 
     alert("Task Updated!");
     formEl.removeAttribute("data-task-id");
@@ -225,7 +228,13 @@ var taskStatusChangeHandler = function(event) {
         tasks[i].status = statusValue;
         }
     }
+    saveTasks();
 };
+
+// 7. TASK SAVE AT LOCAL STORAGE  FUNCTION
+var saveTasks = function() {
+    localStorage.setItem("tasks", JSON.stringify(tasks))
+}
   
 
 // event listeners
