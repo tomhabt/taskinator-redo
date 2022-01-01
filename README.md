@@ -1,6 +1,6 @@
 # taskinator-redo-Project-Tracker-App
 
-Application Link: 
+Application Link: https://tomhabt.github.io/taskinator-redo/
 Repository link: https://github.com/tomhabt/taskinator-redo.git
 
 ## Description
@@ -33,7 +33,8 @@ No installation required
 
 ## Usage
 
-To use the app please view the following link:  Make sure you clean up your local storage memory before preceeding.
+To use the app please view the following link: https://tomhabt.github.io/taskinator-redo/.  Make sure you clean up your local storage memory before preceeding.
+
 ## License
     
 Licensed for use with the [MIT license](./LICENSE).
