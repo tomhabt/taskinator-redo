@@ -21,7 +21,6 @@ var taskFormHandler = function(event) {
     }
     formEl.reset();
 
-    
     var isEdit = formEl.hasAttribute("data-task-id");
     console.log(isEdit);
 
@@ -68,11 +67,25 @@ var createTaskEl = function(taskDataObj) {
 
     var taskActionsEl = createTaskActions(taskIdCounter);
     listItemEl.appendChild(taskActionsEl);
+    for (var i = 0; i < tasks.length; i++) {
+        if (tasks[i].status === "in progress") {
+            tasksInProgressEl.appendChild(listItemEl);
 
-    tasksToDoEl.appendChild(listItemEl);
+            // add entire list item to list
+            tasksInProgressEl.appendChild(listItemEl); 
+            
+        } else if (tasks[i].status === "completed") {
+            tasksCompletedEl.appendChild(listItemEl);
 
-    // add entire list item to list
-    tasksToDoEl.appendChild(listItemEl);
+            // add entire list item to list
+            tasksCompletedEl.appendChild(listItemEl);
+        } else {
+            tasksToDoEl.appendChild(listItemEl);
+
+            // add entire list item to list
+            tasksToDoEl.appendChild(listItemEl);
+        }
+    }
     taskIdCounter++
 };
 
@@ -235,8 +248,19 @@ var taskStatusChangeHandler = function(event) {
 var saveTasks = function() {
     localStorage.setItem("tasks", JSON.stringify(tasks))
 }
-  
 
+// 8. TASK LOAD OR GET FROM LOCAL STORAGE  FUNCTION
+var loadTasks = function() {
+    var tasks = JSON.parse(localStorage.getItem("tasks"));
+    console.log(tasks);
+    if (tasks != null) {
+        for(var i = 0;i < tasks.length; i++) {
+            createTaskEl(tasks[i])
+        } 
+    } else  
+            return false
+};
+  
 // event listeners
 
     pageContentEl.addEventListener("click", taskButtonHandler);
@@ -244,3 +268,6 @@ var saveTasks = function() {
     formEl.addEventListener("submit", taskFormHandler);
 
     pageContentEl.addEventListener("change", taskStatusChangeHandler);
+
+    // call the data from the local storage
+    loadTasks();
