@@ -45,36 +45,37 @@ var taskFormHandler = function (event) {
 // 2. SHOWING TASKS FUNCTION
 var createTaskEl = function (taskDataObj) {
 
-	tasks.push(taskDataObj);
-	//console.log(tasks);
-	//saveTasks();
-
-	// create list item
+    
+    // create list item
 	var listItemEl = document.createElement("li");
 	listItemEl.className = "task-item";
 	// add task id as a custom attribute
 	listItemEl.setAttribute("data-task-id", taskIdCounter);
-
+    
 	// create div to hold task info and add to list item
 	taskInfoEl = document.createElement("div")
 	taskInfoEl.className = "task-info";
-
+    
 	// add HTML content to div
 	taskInfoEl.innerHTML = "<h3 class='task-name'>" + taskDataObj.name + "</h3><span class='task-type'>" + taskDataObj.type + "</span>";
-
+    
 	listItemEl.appendChild(taskInfoEl);
-
+    
 	taskDataObj.id = taskIdCounter;
-
+    
+    tasks.push(taskDataObj);
+    //console.log(tasks);
+    saveTasks();
+    
 	var taskActionsEl = createTaskActions(taskIdCounter, taskDataObj.status);
 	listItemEl.appendChild(taskActionsEl);
-
-
+    
+    
 	if (taskDataObj.status === "in progress") {
-
-		// add entire list item to list
+        
+        // add entire list item to list
 		tasksInProgressEl.appendChild(listItemEl);
-
+        
 	} else if (taskDataObj.status === "completed") {
 		// add entire list item to list
 		tasksCompletedEl.appendChild(listItemEl);
